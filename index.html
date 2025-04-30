@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9288770962100185"
+    crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Simple online calculator, mortgage calculator, and BMI calculator in one page. Optimized for mobile. Useful for English-speaking users worldwide.">
+  <meta name="naver-site-verification" content="b366dbb6459aafa1c91f8f26b783724b86199d71" />
+  <title>Simple Online Calculators</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #000;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header, footer {
+      padding: 1rem;
+      background-color: #000;
+      color: #fff;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    button {
+      display: block;
+      width: 80%;
+      margin: 1rem auto;
+      padding: 1rem;
+      font-size: 1.2rem;
+      border: 1px solid #000;
+      background: #fff;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .calculator {
+      display: none;
+      max-width: 400px;
+      margin: 2rem auto;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .grid button {
+      font-size: 1.2rem;
+      padding: 1rem;
+    }
+
+    #ad-container {
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 600px) {
+      button {
+        font-size: 1rem;
+        padding: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Simple Online Calculators</h1>
+  </header>
+
+  <main>
+    <button onclick="showCalc('basic')">🧮 Basic Calculator</button>
+    <button onclick="showCalc('mortgage')">🏠 Mortgage Calculator</button>
+    <button onclick="showCalc('bmi')">⚖️ BMI Calculator</button>
+
+    <!-- Basic Calculator -->
+    <div id="basic" class="calculator">
+      <input type="text" id="calc-display" placeholder="0" readonly />
+      <div class="grid">
+        <button onclick="appendValue('7')">7</button>
+        <button onclick="appendValue('8')">8</button>
+        <button onclick="appendValue('9')">9</button>
+        <button onclick="appendValue('/')">÷</button>
+
+        <button onclick="appendValue('4')">4</button>
+        <button onclick="appendValue('5')">5</button>
+        <button onclick="appendValue('6')">6</button>
+        <button onclick="appendValue('*')">×</button>
+
+        <button onclick="appendValue('1')">1</button>
+        <button onclick="appendValue('2')">2</button>
+        <button onclick="appendValue('3')">3</button>
+        <button onclick="appendValue('-')">−</button>
+
+        <button onclick="appendValue('0')">0</button>
+        <button onclick="appendValue('.')">.</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="appendValue('+')">+</button>
+      </div>
+      <button onclick="clearDisplay()">Clear</button>
+    </div>
+
+    <!-- Mortgage Calculator -->
+    <div id="mortgage" class="calculator">
+      <input type="number" id="loan" placeholder="Loan Amount" />
+      <input type="number" id="interest" placeholder="Annual Interest Rate (%)" />
+      <input type="number" id="years" placeholder="Loan Term (years)" />
+      <button onclick="calculateMortgage()">Calculate Monthly Payment</button>
+      <p id="mortgage-result"></p>
+    </div>
+
+    <!-- BMI Calculator -->
+    <div id="bmi" class="calculator">
+      <input type="number" id="weight" placeholder="Weight (kg)" />
+      <input type="number" id="height" placeholder="Height (cm)" />
+      <button onclick="calculateBMI()">Calculate BMI</button>
+      <p id="bmi-result"></p>
+    </div>
+
+    <!-- AdSense Placeholder -->
+    <div id="ad-container">
+      <!-- Replace this with your actual AdSense code -->
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9288770962100185"
+            crossorigin="anonymous"></script>
+        <!-- notepad -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-9288770962100185"
+            data-ad-slot="6399153707"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+  </main>
+
+  <script>
+    function showCalc(id) {
+      document.querySelectorAll('.calculator').forEach(div => div.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+
+    function appendValue(val) {
+      const display = document.getElementById('calc-display');
+      display.value += val;
+    }
+
+    function calculate() {
+      const display = document.getElementById('calc-display');
+      try {
+        display.value = eval(display.value);
+      } catch {
+        display.value = 'Error';
+      }
+    }
+
+    function clearDisplay() {
+      document.getElementById('calc-display').value = '';
+    }
+
+    function calculateMortgage() {
+      const loan = parseFloat(document.getElementById('loan').value);
+      const annualRate = parseFloat(document.getElementById('interest').value);
+      const years = parseInt(document.getElementById('years').value);
+      const monthlyRate = annualRate / 100 / 12;
+      const n = years * 12;
+      const monthlyPayment = (loan * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -n));
+      document.getElementById('mortgage-result').innerText = isFinite(monthlyPayment)
+        ? `Monthly Payment: $${monthlyPayment.toFixed(2)}`
+        : 'Please enter valid numbers.';
+    }
+
+    function calculateBMI() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value) / 100;
+      const bmi = weight / (height * height);
+      document.getElementById('bmi-result').innerText = isFinite(bmi)
+        ? `Your BMI: ${bmi.toFixed(2)}`
+        : 'Please enter valid weight and height.';
+    }
+  </script>
+
+</body>
+</html>
